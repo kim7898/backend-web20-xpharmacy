@@ -1,0 +1,283 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Xpharmacy
+  description: our frist project
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+definitions:
+  LoginBody:
+    type: object
+    title: login
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+        example: no_stress
+      password:
+        type: string
+        example: no_stress
+  UserBody:
+    type: object
+    title: user
+    properties:
+      username:
+        type: string
+        example: kimoanh
+      password:
+        type: string
+        example: 123456
+      phone:
+        type: string
+        example: 0123456789
+      order:
+        type: object
+        example: null
+  Prescription:
+    type: object
+    title: Prescription
+    properties:
+      image:
+        type: string
+      phone:
+        type: string
+        example: 42798
+      createAt:
+        type: string
+        example: 26-5-2019
+      createBy:
+        type: string
+  Product_Post_Body:
+    type: object
+    title: Product
+    properties:
+      image:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+paths:
+  /product:
+    post:
+      summary: create new product
+      tags:
+        - Product
+      parameters:
+        - name: product
+          in: body
+          description: post new product
+          required: true
+          schema:
+            $ref: '#/definitions/Product_Post_Body'
+      responses:
+        200:
+          description: Post product success
+    get:
+      summary: get all product
+      tags: 
+        - Product
+      description: get all product infomation
+      responses:
+        200:
+          description: OK
+  /product/{id}:
+    get:
+      summary: get product detail by id
+      tags: 
+        - Product
+      description: get product by id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: delete product
+      tags: 
+        - Product
+      description: delete product
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+    
+    
+        
+        
+
+  /prescription:
+    post:
+      summary: Creat presciption
+      tags:
+        - Prescription
+      parameters:
+        - name: Drug
+          in: body
+          description: post
+          required: true
+          schema:
+            $ref: '#/definitions/Prescription'
+      responses:
+        200:
+          description: create the new drug
+    get:
+      summary: Get all presciption
+      tags:
+        - Prescription
+      description: get all drug information
+      responses:
+        200:
+          description: Return all drug
+  /prescription/{id}:
+    get:
+      summary: Get 1 prescription
+      tags:
+        - Prescription
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of drug
+          type: string
+      responses:
+        200:
+          description: get drug by id
+    put:
+      summary: Change phone number prescription
+      tags:
+        - Prescription
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of drug update
+          type: string
+        - name: drug
+          in: body
+          description: the drug you want to update
+          required: true
+          schema:
+            $ref: '#/definitions/Prescription'
+      responses:
+        200:
+          description: The drug has been successfully updated.
+          schema:
+            $ref: '#/definitions/Prescription'
+    delete:
+      summary: Delete prescription
+      tags:
+        - Prescription
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of prescription
+          type: string
+      responses:
+        200:
+          description: delete success prescription
+  /api/v1/user:
+    post:
+      summary: Creat a user
+      tags:
+        - User
+      parameters:
+        - name: user
+          in: body
+          description: register
+          required: true
+          schema:
+            $ref: '#/definitions/UserBody'
+      responses:
+        200:
+          description: Success resgister user
+    get:
+      summary: Get all user and paging
+      tags:
+        - User
+      description: get all user information
+      responses:
+        200:
+          description: Return all users
+  '/api/v1/user/{id}':
+    get:
+      summary: Get 1 user
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of user
+          type: string
+      responses:
+        200:
+          description: get user by id
+    put:
+      summary: Change user password
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of user update
+          type: string
+        - name: user
+          in: body
+          description: the user you want to update
+          required: true
+          schema:
+            $ref: '#/definitions/UserBody'
+      responses:
+        200:
+          description: The user has been successfully updated.
+    delete:
+      summary: Delete user
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of user update
+          type: string
+      responses:
+        200:
+          description: Delete user success
+  /api/v1/user/auth/login:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: login
+          in: body
+          description: login
+          required: true
+          schema:
+            $ref: '#/definitions/LoginBody'
+      responses:
+        200:
+          description: Returns all examples
+  /api/v1/user/auth/logout:
+    get:
+      tags:
+        - User
+      responses:
+        default:
+          description: Successful log out
