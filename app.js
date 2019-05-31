@@ -19,7 +19,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors({ origin: ['http://localhost:3001' , 'https://x-pharmacy.herokuapp.com' , 'https://x-pharmacy.herokuapp.com/api/v1/auth/me, https://x-pharmacy.herokuapp.com/api/v1/auth/login'], 
+app.use(cors({ origin: ['http://localhost:3001' , 'https://x-pharmacy.herokuapp.com' ], 
               credentials: true ,
               }));
 
