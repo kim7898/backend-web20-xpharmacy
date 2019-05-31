@@ -19,11 +19,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-<<<<<<< HEAD
-app.use(cors({ origin: ['http://localhost:3001'], credentials: true }));
-=======
-app.use(cors({ origin: [''], credentials: true }));
->>>>>>> up
+app.use(cors({ origin: ['http://localhost:3001' , 'https://x-pharmacy.herokuapp.com'], credentials: true }));
+
 
 app.use(logger('dev'));
 app.use(express.json());
