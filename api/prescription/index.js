@@ -9,6 +9,7 @@ router.post("/",
     upload.single("image"),
     
     (req, res) => {
+        console.log(req.body)
         // req.body.userId = req.session.userInfo.id ;
         req.body.imgFile = req.file;
         createPrescription(req.body)

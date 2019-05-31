@@ -19,7 +19,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors({ origin: ['http://localhost:3001' , 'https://x-pharmacy.herokuapp.com' ], 
+app.use(cors({ origin: ['http://localhost:3001' , 'http://localhost:3000' ,'https://x-pharmacy.herokuapp.com' ], 
               credentials: true ,
               }));
 
@@ -68,7 +68,7 @@ mongoose.connect(config.MONGO_DB, { useNewUrlParser: true }, err => {
       res.status(err.status || 500);
       res.render('error');
     });
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 8080;
     app.listen(port, err => {
       if (err) console.log(err);
       else console.log("Successful to connect on port: " + port);
