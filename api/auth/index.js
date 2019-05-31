@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
+
 const authController = require('./controller');
 
-router.post("/login", (req, res) => {
+router.post("/login", cors() , (req, res) => {
     authController
     .login(req.body)
     .then(userInfo => {
