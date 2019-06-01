@@ -30,6 +30,7 @@ const getAllProduct = (page) => {
                     )
                 )
             )
+            
             .catch(err => reject(err))
     })
 };
