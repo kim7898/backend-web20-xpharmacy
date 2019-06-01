@@ -47,7 +47,7 @@ const deleteProduct = (id) => {
         productModel.findByIdAndRemove(id, (err, product) => {
             if(err) return reject(err);
             else{
-                return reject(product);
+                return resolve(product);
             }
         });
 
@@ -63,10 +63,19 @@ const getBestSeller = () => {
         ).catch(err => reject);
     })
 }
+
+const getProductByCategory = (category) => {
+    return new Promise((resolve, reject) => {
+        productModel.find({category: `"${category}"`})
+        .then(products => resolve(products))
+        .catch(err => reject(err));
+    })
+}
 module.exports = {
     createProduct,
     getAllProduct,
     getOneProduct,
     deleteProduct,
-    getBestSeller
+    getBestSeller,
+    getProductByCategory
 }

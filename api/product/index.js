@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const upload = multer({dest: "/app/uploads"});
-const { createProduct, getAllProduct, getOneProduct, deleteProduct, getBestSeller } = require('./controller');
+const { createProduct, getAllProduct, getOneProduct, deleteProduct, getBestSeller, getProductByCategory } = require('./controller');
 
 router.post("/",upload.single("image"), (req, res) => {
     req.body.imgFile = req.file;
@@ -20,6 +20,16 @@ router.get("/bestSeller", (req, res) => {
     getBestSeller().then(products => res.status(200).json(products))
     .catch(err => res.send(502).send(err));
 })
+
+router.get("/category", (req, res) => {
+    getProductByCategory(req.query.name)
+    .then(products => {
+        console.log(products);
+        res.status(200).json(products)
+    })
+    .catch(err => res.status(502).send(err));
+})
+
 
 router.get("/:id", (req, res) => {
     getOneProduct(req.params.id)
