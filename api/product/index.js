@@ -16,6 +16,11 @@ router.get("/", (req, res) => {
     .catch(err => res.status(501).send(err));
 
 });
+router.get("/bestSeller", (req, res) => {
+    getBestSeller().then(products => res.status(200).json(products))
+    .catch(err => res.send(502).send(err));
+})
+
 router.get("/:id", (req, res) => {
     getOneProduct(req.params.id)
     .then(product => res.status(200).json(Object.assign({}, product, {
@@ -35,8 +40,5 @@ router.delete("/:id", (req, res) => {
     .catch(err => res.status(501).send(err));
 });
 
-router.get("/bestSeller", (req, res) => {
-    getBestSeller().then(products => res.status(200).json(products))
-    .catch(err => res.send(502).send(err));
-})
+
 module.exports = router;

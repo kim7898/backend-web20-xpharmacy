@@ -56,8 +56,7 @@ const deleteProduct = (id) => {
 
 const getBestSeller = () => {
     return new Promise((resolve, reject) => {
-        productModel.find({bestSeller: "true"})
-        .exec()
+        productModel.find({bestSeller: true})
         .then(bestSellerProducts => resolve(
              bestSellerProducts
             )
