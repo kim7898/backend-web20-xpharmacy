@@ -58,7 +58,11 @@ const getBestSeller = () => {
     return new Promise((resolve, reject) => {
         productModel.find({bestSeller: true})
         .then(bestSellerProducts => resolve(
-             bestSellerProducts
+            bestSellerProducts.map(product =>
+                Object.assign({}, product._doc, {
+                    imageUrl: `/product/${product._id}/data`
+                })
+            )
             )
         ).catch(err => reject);
     })
