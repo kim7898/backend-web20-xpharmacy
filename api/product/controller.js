@@ -57,15 +57,6 @@ const deleteProduct = (id) => {
 
 const getBestSeller = () => {
     return new Promise((resolve, reject) => {
-<<<<<<< HEAD
-        productModel.find({ bestSeller: true })
-            .then(bestSellerProducts => resolve(
-                bestSellerProducts.map(product =>
-                    Object.assign({}, product._doc, {
-                        url: `api/v1/product/${product._id}/data`
-                    })
-                )
-=======
         productModel.find({bestSeller: true})
         .then(bestSellerProducts => resolve(
             bestSellerProducts.map(product =>
@@ -73,7 +64,6 @@ const getBestSeller = () => {
                     imageUrl: `/product/${product._id}/data`
                 })
             )
->>>>>>> 78c100098a198b0f9c96092364969a0d302da13a
             )
             ).catch(err => reject);
     })
