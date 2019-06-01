@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const upload = multer({ dest: "/app/uploads/" });
+const upload = multer({ dest: '/app/uploads/' });
 
 const { createPrescription, getAllPrecription, getOnePresciption } = require("./controller")
 
 router.post("/",
-    upload.single("image"),
-    
+    upload.single('image'),
     (req, res) => {
         console.log(req.body)
         // req.body.userId = req.session.userInfo.id ;

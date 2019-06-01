@@ -1,13 +1,15 @@
 const productModel = require('./productModel');
 const fs = require('fs');
-const createProduct = ({ title, description, price, imgFile }) => {
+const createProduct = ({ title, description, price, imgFile, category, bestSeller }) => {
     return new Promise((resolve, reject) => {
         productModel.create({
             image: fs.readFileSync(imgFile.path),
             contentType: imgFile.mimetype,
             title,
             description,
-            price
+            price,
+            category,
+            bestSeller
         }).then(product => resolve(product._id))
             .catch(err => reject(err));
     });
@@ -36,7 +38,7 @@ const getOneProduct = (id) => {
     return new Promise((resolve, reject) => {
         productModel.findById(id)
             .exec()
-            .then(product => resolve(product))
+            .then(product => resolve(product._doc))
             .catch(err => reject(err));
     })
 };
@@ -50,10 +52,22 @@ const deleteProduct = (id) => {
         });
 
     })
+};
+
+const getBestSeller = () => {
+    return new Promise((resolve, reject) => {
+        productModel.find({bestSeller: "true"})
+        .exec()
+        .then(bestSellerProducts => resolve(
+             bestSellerProducts
+            )
+        ).catch(err => reject);
+    })
 }
 module.exports = {
     createProduct,
     getAllProduct,
     getOneProduct,
-    deleteProduct
+    deleteProduct,
+    getBestSeller
 }

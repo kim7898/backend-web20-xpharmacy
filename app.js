@@ -68,7 +68,7 @@ mongoose.connect(config.MONGO_DB, { useNewUrlParser: true }, err => {
       res.status(err.status || 500);
       res.render('error');
     });
-    const port = process.env.PORT || 8080;
+    const port = process.env.PORT || 3000;
     app.listen(port, err => {
       if (err) console.log(err);
       else console.log("Successful to connect on port: " + port);

@@ -5,6 +5,8 @@ const productSchema = new Schema({
     title: String,
     description: String,
     price: Number,
+    category: String,
+    bestSeller: Boolean,
     createAt: {type: Date, default: new Date()},
 });
 module.exports = model("product", productSchema);
