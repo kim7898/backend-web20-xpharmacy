@@ -62,8 +62,7 @@ const getBestSeller = () => {
             bestSellerProducts.map(product =>
                 Object.assign({}, product._doc, {
                     imageUrl: `/product/${product._id}/data`
-                })
-            )
+                }))
             )
             ).catch(err => reject);
     })
