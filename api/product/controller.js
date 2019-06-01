@@ -74,7 +74,7 @@ const getProductByCategory = (category) => {
             .then(products => resolve(
                 products.map(product => 
                     Object.assign({},product._doc,{
-                        url:`api/v1/${product._id}/data`
+                        imageUrl: `/product/${product._id}/data`
                     })    
                 )
             ))
