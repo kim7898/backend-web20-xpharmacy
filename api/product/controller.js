@@ -45,8 +45,8 @@ const getOneProduct = (id) => {
 const deleteProduct = (id) => {
     return new Promise((resolve, reject) => {
         productModel.findByIdAndRemove(id, (err, product) => {
-            if(err) return reject(err);
-            else{
+            if (err) return reject(err);
+            else {
                 return resolve(product);
             }
         });
@@ -56,19 +56,29 @@ const deleteProduct = (id) => {
 
 const getBestSeller = () => {
     return new Promise((resolve, reject) => {
-        productModel.find({bestSeller: true})
-        .then(bestSellerProducts => resolve(
-             bestSellerProducts
+        productModel.find({ bestSeller: true })
+            .then(bestSellerProducts => resolve(
+                bestSellerProducts.map(product =>
+                    Object.assign({}, product._doc, {
+                        url: `api/v1/product/${product._id}/data`
+                    })
+                )
             )
-        ).catch(err => reject);
+            ).catch(err => reject);
     })
 }
 
 const getProductByCategory = (category) => {
     return new Promise((resolve, reject) => {
-        productModel.find({category: `"${category}"`})
-        .then(products => resolve(products))
-        .catch(err => reject(err));
+        productModel.find({ category: `"${category}"` })
+            .then(products => resolve(
+                products.map(product => 
+                    Object.assign({},product._doc,{
+                        url:`api/v1/${product._id}/data`
+                    })    
+                )
+            ))
+            .catch(err => reject(err));
     })
 }
 module.exports = {
