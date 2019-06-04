@@ -19,13 +19,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-const corsOptionsDelegate = function (req, callback) {
-  const corsOptions = { origin: true }
-  callback(null, corsOptions) 
-}
 
+app.use(cors({
+  origin: ['http://localhost:3001', 'http://localhost:3000','https://frontend-xpharmacy.herokuapp.com' ], 
+              credentials: true ,
+              }));
 
-app.use(cors(corsOptionsDelegate));
 
 app.use(logger('dev'));
 app.use(express.json());
