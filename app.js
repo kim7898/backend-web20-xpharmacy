@@ -19,12 +19,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-const corsOptions = {
-  origin: true
+const corsOptionsDelegate = function (req, callback) {
+  const corsOptions = { origin: true }
+  callback(null, corsOptions) 
 }
 
-app.use(cors(corsOptions));
 
+app.use(cors(corsOptionsDelegate));
 
 app.use(logger('dev'));
 app.use(express.json());
