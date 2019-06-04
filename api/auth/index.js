@@ -8,9 +8,12 @@ router.post("/login",(req, res) => {
     authController
     .login(req.body)
     .then(userInfo => {
+        console.log(userInfo);
         req.session.userInfo = userInfo;
-        res.status(200).send("Login succes");
+        res.status(200).json(userInfo);
     }).catch(err => {
+        console.log(err);
+        
         res.status(501).send(err);
     })
 });
@@ -19,7 +22,7 @@ router.post("/signup", (req,res)=>{
     .signup(req.body)
     .then(user => {
         req.session.userInfo = {account: user.account , id: user._id};
-        res.status(200).send("register success");
+        res.status(200).json(user);
     }).catch(err => {
         res.status(501).send(err);
     })

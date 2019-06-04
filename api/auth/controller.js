@@ -13,7 +13,7 @@ const login = ({ account, password }) => {
                     bcrypt.compare(password, user.password)
                     .then(res => {
                         if(res){
-                            resolve({account: user.account , id: user._id})
+                            resolve(user)
                         }
                     }).catch(err => reject(err))
                 }
